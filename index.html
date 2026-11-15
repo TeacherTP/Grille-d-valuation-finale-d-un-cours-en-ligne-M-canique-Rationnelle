@@ -1,0 +1,1351 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Grille d'évaluation finale - Mécanique Rationnelle</title>
+
+<style>
+:root {
+ --navy:#17365D;
+ --blue:#2563A6;
+ --light:#EEF4FB;
+ --border:#D7E0EC;
+ --green:#198754;
+}
+
+* {box-sizing:border-box;}
+
+body {
+ margin:0;
+ padding:20px;
+ background:#EDF1F6;
+ color:#243247;
+ font-family:Arial,sans-serif;
+}
+
+.container {
+ max-width:1250px;
+ margin:auto;
+}
+
+.sheet {
+ background:white;
+ padding:28px;
+ border-radius:10px;
+ box-shadow:0 5px 25px #1c35501a;
+}
+
+.topline {
+ display:flex;
+ justify-content:space-between;
+ gap:15px;
+ border-bottom:3px solid var(--navy);
+ padding-bottom:10px;
+ color:#52647A;
+ font-size:12px;
+}
+
+h1 {
+ text-align:center;
+ color:var(--navy);
+ font-size:23px;
+ margin:20px 0 7px;
+ text-transform:uppercase;
+}
+
+.subtitle {
+ text-align:center;
+ color:var(--blue);
+ font-weight:bold;
+ font-size:17px;
+ margin-bottom:20px;
+}
+
+.section-title {
+ color:var(--navy);
+ border-left:5px solid var(--blue);
+ padding:8px 12px;
+ background:var(--light);
+ margin:20px 0 12px;
+ font-size:15px;
+}
+
+.identity {
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:10px;
+ padding:15px;
+ background:#F8FAFC;
+ border:1px solid var(--border);
+ border-radius:8px;
+}
+
+.field label {
+ display:block;
+ font-weight:bold;
+ font-size:12px;
+ margin-bottom:5px;
+ color:#40536B;
+}
+
+.field input,.field select {
+ width:100%;
+ padding:8px;
+ border:1px solid #CBD5E1;
+ border-radius:5px;
+ font-size:12px;
+ background:white;
+}
+
+.full {grid-column:1/-1;}
+
+.legend {
+ display:flex;
+ flex-wrap:wrap;
+ gap:7px;
+ margin:12px 0;
+}
+
+.legend span {
+ padding:7px 10px;
+ border-radius:5px;
+ font-size:11px;
+ font-weight:bold;
+}
+
+.l1 {background:#D9F2E5;color:#146C43;}
+.l2 {background:#DCEAFE;color:#1D4ED8;}
+.l3 {background:#FFF0C2;color:#946200;}
+.l4 {background:#FFE2D9;color:#B54725;}
+.l5 {background:#E5E7EB;color:#4B5563;}
+
+.table-wrap {
+ overflow-x:auto;
+}
+
+table {
+ width:100%;
+ border-collapse:collapse;
+ font-size:11px;
+}
+
+th {
+ background:var(--navy);
+ color:white;
+ padding:9px 5px;
+ text-align:center;
+ border:1px solid white;
+}
+
+td {
+ border:1px solid var(--border);
+ padding:7px 5px;
+ text-align:center;
+}
+
+td.criterion {
+ text-align:left;
+ min-width:270px;
+ line-height:1.3;
+}
+
+th.level-1 {background:#198754;}
+th.level-2 {background:#2563A6;}
+th.level-3 {background:#C18A17;}
+th.level-4 {background:#C65A3A;}
+th.level-5 {background:#64748B;}
+
+tr.group-row td {
+ background:#EAF1F9;
+ color:var(--navy);
+ font-weight:bold;
+ padding:9px;
+}
+
+tr.data-row:nth-child(even) {
+ background:#FAFCFF;
+}
+
+input[type=radio] {
+ width:16px;
+ height:16px;
+ cursor:pointer;
+ accent-color:var(--blue);
+}
+
+.total-cell {
+ font-weight:bold;
+ color:var(--navy);
+ white-space:nowrap;
+ min-width:65px;
+}
+
+.score-input {
+ width:75px;
+ padding:7px;
+ text-align:center;
+ font-size:13px;
+ font-weight:bold;
+ color:var(--navy);
+ border:1px solid var(--border);
+ border-radius:5px;
+ background:#F7FAFD;
+}
+
+.progress-track {
+ width:100%;
+ height:10px;
+ background:#E9EEF4;
+ border-radius:20px;
+ overflow:hidden;
+}
+
+.progress-fill {
+ height:100%;
+ border-radius:20px;
+ transition:width .2s;
+}
+
+.summary {
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:12px;
+ margin-top:15px;
+}
+
+.stat {
+ padding:15px;
+ border-radius:8px;
+ background:#F1F6FC;
+ border:1px solid var(--border);
+ text-align:center;
+}
+
+.stat small {
+ display:block;
+ color:#63748A;
+ margin-bottom:7px;
+}
+
+.stat strong {
+ font-size:23px;
+ color:var(--navy);
+}
+
+.mention {
+ display:inline-block;
+ margin-top:6px;
+ padding:6px 12px;
+ border-radius:6px;
+ background:#D9F2E5;
+ color:#146C43;
+ font-weight:bold;
+ font-size:12px;
+}
+
+.signatures {
+ display:flex;
+ justify-content:space-between;
+ gap:25px;
+ margin-top:35px;
+}
+
+.signature {
+ width:45%;
+ border-top:1px solid #8996A7;
+ padding-top:8px;
+ text-align:center;
+ min-height:55px;
+ font-size:12px;
+}
+
+.footer {
+ margin-top:20px;
+ padding-top:9px;
+ border-top:2px solid var(--navy);
+ text-align:right;
+ color:#52647A;
+ font-size:11px;
+}
+
+.actions {
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:10px;
+ margin:20px 0;
+}
+
+button {
+ border:0;
+ border-radius:6px;
+ padding:11px 18px;
+ color:white;
+ background:var(--blue);
+ font-weight:bold;
+ cursor:pointer;
+}
+
+button:hover {opacity:.88;}
+button.reset {background:#64748B;}
+button.pdf {background:#198754;}
+button.clear {background:#B45309;}
+
+@media(max-width:700px) {
+ body {padding:7px;}
+ .sheet {padding:12px;}
+ .identity {grid-template-columns:1fr;}
+ .full {grid-column:auto;}
+ .summary {grid-template-columns:1fr;}
+ .topline {flex-direction:column;}
+}
+
+@media print {
+
+ @page {
+  size:A4 landscape;
+  margin:8mm;
+ }
+
+ html,body {
+  width:100%;
+  margin:0;
+  padding:0;
+  background:white;
+  print-color-adjust:exact;
+  -webkit-print-color-adjust:exact;
+ }
+
+ .container {
+  max-width:none;
+  width:100%;
+ }
+
+ .sheet {
+  padding:0;
+  box-shadow:none;
+  border-radius:0;
+ }
+
+ .actions {display:none!important;}
+
+ h1 {
+  font-size:18px;
+  margin:12px 0 5px;
+ }
+
+ .subtitle {
+  font-size:14px;
+  margin-bottom:12px;
+ }
+
+ .section-title {
+  font-size:12px;
+  margin:12px 0 7px;
+  padding:6px 9px;
+ }
+
+ .identity {
+  padding:9px;
+  gap:7px;
+ }
+
+ .field input,.field select {
+  border:0;
+  border-bottom:1px solid #aaa;
+  padding:4px;
+  font-size:10px;
+ }
+
+ .legend {
+  gap:5px;
+  margin:7px 0;
+ }
+
+ .legend span {
+  padding:5px 7px;
+  font-size:9px;
+ }
+
+ table {
+  font-size:9px;
+ }
+
+ th {
+  padding:6px 3px;
+ }
+
+ td {
+  padding:4px 3px;
+ }
+
+ td.criterion {
+  min-width:0;
+ }
+
+ input[type=radio] {
+  width:12px;
+  height:12px;
+ }
+
+ .score-input {
+  border:0;
+  background:transparent;
+  font-size:10px;
+  padding:2px;
+ }
+
+ .summary {
+  gap:8px;
+  margin-top:9px;
+ }
+
+ .stat {
+  padding:9px;
+ }
+
+ .stat strong {
+  font-size:17px;
+ }
+
+ .signatures {
+  margin-top:22px;
+ }
+
+ .signature {
+  min-height:45px;
+ }
+
+ .footer {
+  margin-top:12px;
+ }
+
+ tr,td,th {
+  break-inside:avoid;
+ }
+
+ .section-title {
+  break-after:avoid;
+ }
+}
+
+/* =========================================
+   AMELIORATION DE LA LISIBILITE
+   FORMAT A4 PAYSAGE
+========================================= */
+
+/* Affichage à l'écran */
+body {
+    font-size: 14px;
+}
+
+.sheet {
+    padding: 30px;
+}
+
+h1 {
+    font-size: 26px;
+}
+
+.subtitle {
+    font-size: 19px;
+}
+
+.section-title {
+    font-size: 17px;
+    padding: 11px 14px;
+    margin: 24px 0 14px;
+}
+
+.field label {
+    font-size: 14px;
+}
+
+.field input,
+.field select {
+    font-size: 14px;
+    padding: 10px;
+}
+
+.legend span {
+    font-size: 13px;
+    padding: 9px 12px;
+}
+
+table {
+    font-size: 13px;
+    table-layout: fixed;
+}
+
+th {
+    font-size: 12px;
+    padding: 12px 6px;
+    line-height: 1.4;
+}
+
+td {
+    font-size: 13px;
+    padding: 10px 7px;
+    line-height: 1.5;
+}
+
+td.criterion {
+    width: 40%;
+    min-width: 300px;
+    text-align: left;
+    line-height: 1.5;
+}
+
+input[type="radio"] {
+    width: 19px;
+    height: 19px;
+}
+
+.total-cell {
+    font-size: 13px;
+}
+
+.score-input {
+    font-size: 14px;
+    padding: 9px;
+}
+
+tr.group-row td {
+    font-size: 14px;
+    padding: 12px 9px;
+}
+
+.stat strong {
+    font-size: 25px;
+}
+
+/* =========================================
+   IMPRESSION PDF - A4 PAYSAGE
+========================================= */
+
+@media print {
+
+    @page {
+        size: A4 landscape;
+        margin: 10mm;
+    }
+
+    html,
+    body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: white !important;
+        color: #243247;
+        print-color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    .container {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+    }
+
+    .sheet {
+        padding: 0;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .actions {
+        display: none !important;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 15px 0 8px;
+    }
+
+    .subtitle {
+        font-size: 17px;
+        margin-bottom: 15px;
+    }
+
+    .topline {
+        font-size: 12px;
+        padding-bottom: 10px;
+    }
+
+    .section-title {
+        font-size: 15px;
+        padding: 9px 12px;
+        margin: 17px 0 10px;
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+
+    .identity {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .field label {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+
+    .field input,
+    .field select {
+        font-size: 12px;
+        padding: 7px;
+        border: 1px solid #CBD5E1;
+    }
+
+    .legend {
+        gap: 7px;
+        margin: 10px 0;
+    }
+
+    .legend span {
+        font-size: 11px;
+        padding: 7px 9px;
+    }
+
+    .table-wrap {
+        overflow: visible !important;
+    }
+
+    table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+        font-size: 11.5px;
+    }
+
+    /* Largeur des colonnes */
+    #evaluationTable th:first-child,
+    #evaluationTable td:first-child {
+        width: 40%;
+    }
+
+    #evaluationTable th:nth-child(2),
+    #evaluationTable th:nth-child(3),
+    #evaluationTable th:nth-child(4),
+    #evaluationTable th:nth-child(5),
+    #evaluationTable th:nth-child(6) {
+        width: 9.5%;
+    }
+
+    #evaluationTable th:last-child,
+    #evaluationTable td:last-child {
+        width: 12.5%;
+    }
+
+    th {
+        font-size: 11px;
+        line-height: 1.4;
+        padding: 10px 5px;
+        font-weight: bold;
+        vertical-align: middle;
+    }
+
+    td {
+        font-size: 11.5px;
+        padding: 9px 6px;
+        line-height: 1.45;
+        vertical-align: middle;
+    }
+
+    td.criterion {
+        min-width: 0;
+        font-size: 12px;
+        text-align: left;
+        line-height: 1.5;
+        overflow-wrap: break-word;
+    }
+
+    tr.group-row td {
+        font-size: 12.5px;
+        padding: 10px 8px;
+        font-weight: bold;
+    }
+
+    input[type="radio"] {
+        width: 17px;
+        height: 17px;
+        margin: 3px;
+        vertical-align: middle;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .total-cell {
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    #resultsBody td {
+        font-size: 11.5px;
+        padding: 9px 6px;
+    }
+
+    .summary {
+        gap: 10px;
+        margin-top: 12px;
+    }
+
+    .stat {
+        padding: 12px;
+    }
+
+    .stat small {
+        font-size: 11px;
+    }
+
+    .stat strong {
+        font-size: 21px;
+    }
+
+    .mention {
+        font-size: 11px;
+    }
+
+    .signatures {
+        margin-top: 28px;
+    }
+
+    .signature {
+        font-size: 12px;
+        min-height: 55px;
+    }
+
+    .footer {
+        font-size: 11px;
+        margin-top: 15px;
+    }
+
+    /* Eviter de couper une ligne du tableau */
+    tr,
+    td,
+    th {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-row-group;
+    }
+
+    .group-row {
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+
+    button {
+        display: none !important;
+    }
+}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+<div class="sheet">
+
+<div class="topline">
+<strong>PORTFOLIO FORMATION TICE 2025/2026</strong>
+<strong>ÉCOLE NATIONALE SUPÉRIEURE DES TRAVAUX PUBLICS</strong>
+</div>
+
+<h1>Grille d'évaluation finale d'un cours en ligne</h1>
+
+<div class="subtitle">
+Cours Mécanique Rationnelle – Taqiyeddine ASSAS
+</div>
+
+<h2 class="section-title">Identification du testeur</h2>
+
+<div class="identity">
+
+<div class="field full">
+<label>Sélectionner le testeur</label>
+<select id="tester" onchange="selectTester()">
+<option value="">-- Choisir un enseignant --</option>
+<option value="ladjel">Enseignant 01 – Mohamed LADJEL</option>
+<option value="annad">Enseignant 02 – Mohamed ANNAD</option>
+<option value="laib">Enseignant 03 – Salah Eddine LAIB</option>
+</select>
+</div>
+
+<div class="field">
+<label>Prénom</label>
+<input id="prenom" type="text" placeholder="Prénom">
+</div>
+
+<div class="field">
+<label>Nom</label>
+<input id="nom" type="text" placeholder="Nom">
+</div>
+
+<div class="field">
+<label>Adresse e-mail</label>
+<input id="email" type="email" placeholder="Adresse e-mail">
+</div>
+
+<div class="field">
+<label>Grade</label>
+<select id="grade">
+<option value="">-- Grade --</option>
+<option>MAA</option>
+<option>MCB</option>
+<option>MCA</option>
+<option>Pr</option>
+</select>
+</div>
+
+<div class="field">
+<label>Établissement</label>
+<input id="etablissement"
+value="École Nationale Supérieure des Travaux Publics d'Alger – Francis Jeanson">
+</div>
+
+<div class="field">
+<label>Département</label>
+<select id="departement">
+<option>DIB</option>
+<option>DMS</option>
+<option>DIB / DMS</option>
+</select>
+</div>
+
+</div>
+
+<h2 class="section-title">Mentions d'évaluation</h2>
+
+<div class="legend">
+<span class="l1">Excellent : 90–100 %</span>
+<span class="l2">Très bien : 70–&lt;90 %</span>
+<span class="l3">Bien : 50–&lt;70 %</span>
+<span class="l4">Insuffisant : &lt;50 %</span>
+<span class="l5">Inexistant : 0 %</span>
+</div>
+
+<h2 class="section-title">I. Grille détaillée d'évaluation du cours</h2>
+
+<p style="font-size:11px">
+Pour chaque critère, cochez une seule case correspondant au niveau
+d'appréciation retenu. Le pourcentage est calculé automatiquement.
+</p>
+
+<div class="table-wrap">
+<table id="evaluationTable">
+
+<thead>
+<tr>
+<th style="width:40%">Critères d'évaluation</th>
+<th class="level-1">Excellent<br>90–100 %</th>
+<th class="level-2">Très bien<br>70–&lt;90 %</th>
+<th class="level-3">Bien<br>50–&lt;70 %</th>
+<th class="level-4">Insuffisant<br>&lt;50 %</th>
+<th class="level-5">Inexistant<br>0 %</th>
+<th>Total (%)</th>
+</tr>
+</thead>
+
+<tbody id="criteriaBody"></tbody>
+</table>
+</div>
+
+<h2 class="section-title">II. Synthèse des résultats par rubrique</h2>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>N°</th>
+<th>Rubriques d'évaluation</th>
+<th>Critères évalués</th>
+<th>Pourcentage obtenu</th>
+<th>Mention</th>
+<th>Progression</th>
+</tr>
+</thead>
+<tbody id="resultsBody"></tbody>
+<tfoot>
+<tr style="background:#EAF1F9;font-weight:bold">
+<td colspan="3">MOYENNE GÉNÉRALE</td>
+<td id="averageCell">0,00 %</td>
+<td id="averageMention">Inexistant</td>
+<td>100 %</td>
+</tr>
+</tfoot>
+</table>
+</div>
+
+<h2 class="section-title">III. Résultat final</h2>
+
+<div class="summary">
+
+<div class="stat">
+<small>Note finale</small>
+<strong id="finalScore">0,00 %</strong>
+<div class="progress-track">
+<div id="finalProgress" class="progress-fill"
+style="width:0%;background:#198754"></div>
+</div>
+</div>
+
+<div class="stat">
+<small>Mention générale</small>
+<strong id="finalMention">Inexistant</strong>
+<div>
+<span class="mention" id="mentionBadge">Inexistant</span>
+</div>
+</div>
+
+<div class="stat">
+<small>Critères évalués</small>
+<strong id="checkedCount">0 / 31</strong>
+<div class="progress-track">
+<div id="completionProgress" class="progress-fill"
+style="width:0%;background:#2563A6"></div>
+</div>
+</div>
+
+</div>
+
+<div class="signatures">
+
+<div class="signature">
+Signature du testeur
+<br><br>
+<strong id="signatureName"></strong>
+</div>
+
+<div class="signature">
+Date et signature
+<br><br>
+____________________________
+</div>
+
+</div>
+
+<div class="footer">
+ENSTP – Département DIB / DMS
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="pdf" onclick="validateAndPrint()">
+Imprimer / Enregistrer en PDF
+</button>
+
+<button class="reset" onclick="resetGrid()">
+Réinitialiser la grille
+</button>
+
+<button class="clear" onclick="resetTester()">
+Changer de testeur
+</button>
+
+</div>
+</div>
+
+<script>
+
+// INFORMATIONS DES TESTEURS
+
+const testers = {
+ ladjel:{
+  prenom:"Mohamed",
+  nom:"Ladjel",
+  email:"m.ladjel@enstp.edu.dz"
+ },
+ annad:{
+  prenom:"Mohamed",
+  nom:"Annad",
+  email:"m.annad@enstp.edu.dz"
+ },
+ laib:{
+  prenom:"Salah Eddine",
+  nom:"Laib",
+  email:"s.laib@enstp.edu.dz"
+ }
+};
+
+function selectTester(){
+ const key=document.getElementById("tester").value;
+ if(!key)return;
+
+ const t=testers[key];
+
+ document.getElementById("prenom").value=t.prenom;
+ document.getElementById("nom").value=t.nom;
+ document.getElementById("email").value=t.email;
+
+ updateSignature();
+}
+
+function updateSignature(){
+ const p=document.getElementById("prenom").value;
+ const n=document.getElementById("nom").value;
+
+ document.getElementById("signatureName").textContent=
+ (p+" "+n).trim();
+}
+
+document.getElementById("prenom")
+.addEventListener("input",updateSignature);
+
+document.getElementById("nom")
+.addEventListener("input",updateSignature);
+
+
+// LES SIX RUBRIQUES ET LES 31 CRITERES
+
+const groups=[
+
+{
+ name:"Aspect organisationnel",
+ color:"#B58A45",
+ criteria:[
+ "Clarté de la présentation et de la structure du cours",
+ "Présence de la partie descriptive du cours ainsi que tous les éléments importants",
+ "Assurer le principe de complémentarité des éléments du cours",
+ "Clarté du fil conducteur entre les objectifs, les méthodes pédagogiques, les moyens d’évaluation ainsi que le contenu en général",
+ "Présentation de la carte conceptuelle",
+ "Existence de ressources : images, icônes, dessins, photos, schémas, tableaux, animations, vidéos, etc.",
+ "Adaptation de la langue utilisée au public ciblé"
+ ]
+},
+
+{
+ name:"Fiche de contact",
+ color:"#64748B",
+ criteria:[
+ "Présentation de l’enseignant",
+ "Identification du public cible",
+ "Détail du volume horaire",
+ "Espaces de communication (chat, forum)",
+ "Les modalités d’évaluation",
+ "Le coefficient du module"
+ ]
+},
+
+{
+ name:"Système d'entrée",
+ color:"#31945A",
+ criteria:[
+ "Présentation des objectifs du cours",
+ "Utilisation de verbes de BLOOM dans les objectifs",
+ "Présence des pré-requis",
+ "Cohérence entre les pré-requis et le contenu",
+ "Utilisation de verbes de BLOOM dans les pré-requis"
+ ]
+},
+
+{
+ name:"Système d'apprentissage",
+ color:"#2878B9",
+ criteria:[
+ "Division du cours en chapitres cohérents",
+ "Cohérence entre les objectifs et le contenu du cours",
+ "Description claire du contenu du cours",
+ "Système d’apprentissage basé sur un feedback",
+ "Activités pour chaque classe : TD, TP, Quiz, questions, etc.",
+ "Adaptation du volume horaire imparti à chaque unité d’apprentissage",
+ "Ajout de ressources d’aide (PDF, site web, vidéos, etc.)"
+ ]
+},
+
+{
+ name:"Système de sortie",
+ color:"#8064A2",
+ criteria:[
+ "Évaluation par des post-tests",
+ "Stratégie d’orientation en cas de succès",
+ "En cas d’échec : présence de remédiation ou de réorientation"
+ ]
+},
+
+{
+ name:"Bibliographie",
+ color:"#238A91",
+ criteria:[
+ "Proposition d’une bibliographie",
+ "Actualité des références",
+ "Respect des normes de citation"
+ ]
+}
+
+];
+
+const scores=[95,80,60,25,0];
+
+let totalCriteria=0;
+
+
+// MENTIONS
+
+function mention(score){
+ if(score===0)return "Inexistant";
+ if(score<50)return "Insuffisant";
+ if(score<70)return "Bien";
+ if(score<90)return "Très bien";
+ return "Excellent";
+}
+
+function mentionColor(score){
+ if(score===0)return "#E5E7EB";
+ if(score<50)return "#FFE2D9";
+ if(score<70)return "#FFF0C2";
+ if(score<90)return "#DCEAFE";
+ return "#D9F2E5";
+}
+
+
+// CONSTRUCTION DE LA GRILLE
+
+function buildGrid(){
+
+ const body=document.getElementById("criteriaBody");
+ body.innerHTML="";
+ totalCriteria=0;
+
+ groups.forEach((group,gi)=>{
+
+  const heading=document.createElement("tr");
+  heading.className="group-row";
+
+  heading.innerHTML=`
+   <td colspan="6">${gi+1}. ${group.name}</td>
+   <td class="total-cell" id="groupTotal${gi}">—</td>
+  `;
+
+  body.appendChild(heading);
+
+  group.criteria.forEach((criterion,ci)=>{
+
+   totalCriteria++;
+
+   const name=`g${gi}_c${ci}`;
+
+   const row=document.createElement("tr");
+   row.className="data-row";
+
+   row.innerHTML=`
+    <td class="criterion">${criterion}</td>
+
+    ${scores.map((score,level)=>`
+     <td>
+      <input type="radio"
+       name="${name}"
+       value="${score}"
+       aria-label="${criterion} - niveau ${level+1}"
+       onchange="calculateResults()">
+     </td>
+    `).join("")}
+
+    <td class="total-cell" id="total_${gi}_${ci}">—</td>
+   `;
+
+   body.appendChild(row);
+  });
+
+ });
+
+ calculateResults();
+}
+
+
+// CALCUL DES RESULTATS
+
+function calculateResults(){
+
+ const resultsBody=document.getElementById("resultsBody");
+ resultsBody.innerHTML="";
+
+ let evaluated=0;
+ let evaluatedGroups=[];
+ let groupResults=[];
+
+ groups.forEach((group,gi)=>{
+
+  let points=0;
+  let count=0;
+
+  group.criteria.forEach((criterion,ci)=>{
+
+   const name=`g${gi}_c${ci}`;
+
+   const selected=document.querySelector(
+    `input[name="${name}"]:checked`
+   );
+
+   const cell=document.getElementById(`total_${gi}_${ci}`);
+
+   if(selected){
+    const value=Number(selected.value);
+    points+=value;
+    count++;
+    evaluated++;
+    cell.textContent=value.toFixed(2)+" %";
+   }else{
+    cell.textContent="—";
+   }
+
+  });
+
+  const percentage=count?points/count:0;
+
+  groupResults.push(percentage);
+
+  const groupTotal=document.getElementById(`groupTotal${gi}`);
+
+  groupTotal.textContent=count?
+   percentage.toFixed(2)+" %":"—";
+
+  if(count){
+   evaluatedGroups.push(percentage);
+  }
+
+  const tr=document.createElement("tr");
+
+  tr.innerHTML=`
+   <td>0${gi+1}</td>
+   <td style="text-align:left;font-weight:bold;
+   border-left:4px solid ${group.color}">
+    ${group.name}
+   </td>
+   <td>${count} / ${group.criteria.length}</td>
+   <td class="total-cell">
+    ${count?percentage.toFixed(2)+" %":"—"}
+   </td>
+   <td>
+    ${count?`
+     <span style="display:inline-block;padding:5px 8px;
+     border-radius:5px;font-weight:bold;
+     background:${mentionColor(percentage)}">
+     ${mention(percentage)}
+     </span>`:"—"}
+   </td>
+   <td>
+    <div class="progress-track">
+     <div class="progress-fill"
+     style="width:${percentage}%;background:${group.color}">
+     </div>
+    </div>
+   </td>
+  `;
+
+  resultsBody.appendChild(tr);
+
+ });
+
+ // MOYENNE DES SIX RUBRIQUES EVALUEES
+
+ const finalScore=evaluatedGroups.length?
+  evaluatedGroups.reduce((a,b)=>a+b,0)/evaluatedGroups.length:0;
+
+ const result=finalScore.toFixed(2).replace(".",",");
+
+ const finalMention=mention(finalScore);
+
+ document.getElementById("averageCell").textContent=result+" %";
+ document.getElementById("averageMention").textContent=finalMention;
+
+ document.getElementById("finalScore").textContent=result+" %";
+ document.getElementById("finalMention").textContent=finalMention;
+ document.getElementById("mentionBadge").textContent=finalMention;
+
+ document.getElementById("finalProgress").style.width=
+ finalScore+"%";
+
+ document.getElementById("checkedCount").textContent=
+ evaluated+" / "+totalCriteria;
+
+ document.getElementById("completionProgress").style.width=
+ (evaluated/totalCriteria*100)+"%";
+
+ document.getElementById("mentionBadge").style.background=
+ mentionColor(finalScore);
+
+ document.getElementById("mentionBadge").style.color="#17365D";
+}
+
+
+// VALIDATION ET IMPRESSION PDF
+
+function validateAndPrint(){
+
+ const tester=document.getElementById("tester").value;
+ const prenom=document.getElementById("prenom").value.trim();
+ const nom=document.getElementById("nom").value.trim();
+ const email=document.getElementById("email").value.trim();
+ const grade=document.getElementById("grade").value;
+
+ if(!tester||!prenom||!nom||!email||!grade){
+  alert("Veuillez renseigner les informations du testeur et son grade.");
+  return;
+ }
+
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+  alert("Veuillez saisir une adresse e-mail valide.");
+  return;
+ }
+
+ const evaluated=document.querySelectorAll(
+  '#criteriaBody input[type="radio"]:checked'
+ ).length;
+
+ if(evaluated!==totalCriteria){
+  if(!confirm(
+   "Attention : "+evaluated+" critères sur "+totalCriteria+
+   " sont évalués. Voulez-vous continuer ?"
+  ))return;
+ }
+
+ window.print();
+}
+
+
+// REINITIALISATION
+
+function resetGrid(){
+
+ if(!confirm("Effacer toutes les réponses de la grille ?"))return;
+
+ document.querySelectorAll(
+  '#criteriaBody input[type="radio"]:checked'
+ ).forEach(input=>input.checked=false);
+
+ calculateResults();
+}
+
+function resetTester(){
+
+ if(!confirm("Changer de testeur et effacer les informations ?"))return;
+
+ document.getElementById("tester").value="";
+ document.getElementById("prenom").value="";
+ document.getElementById("nom").value="";
+ document.getElementById("email").value="";
+ document.getElementById("grade").value="";
+
+ document.getElementById("signatureName").textContent="";
+}
+
+
+// LANCEMENT
+
+buildGrid();
+
+</script>
+</body>
+</html>
