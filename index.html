@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -303,134 +302,113 @@ button.clear {background:#B45309;}
  .topline {flex-direction:column;}
 }
 
+
+
+@page {
+    size: A4 landscape;
+    margin: 7mm;
+}
+
 @media print {
 
- @page {
-  size:A4 landscape;
-  margin:8mm;
- }
+    html, body {
+        width: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 9pt !important;
+        color: #17365d;
+        background: white !important;
+    }
 
- html,body {
-  width:100%;
-  margin:0;
-  padding:0;
-  background:white;
-  print-color-adjust:exact;
-  -webkit-print-color-adjust:exact;
- }
+    * {
+        box-sizing: border-box !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
 
- .container {
-  max-width:none;
-  width:100%;
- }
+    .no-print,
+    button,
+    .actions,
+    .action-buttons {
+        display: none !important;
+    }
 
- .sheet {
-  padding:0;
-  box-shadow:none;
-  border-radius:0;
- }
+    .page {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+    }
 
- .actions {display:none!important;}
+    table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        font-size: 8pt !important;
+        page-break-inside: auto;
+    }
 
- h1 {
-  font-size:18px;
-  margin:12px 0 5px;
- }
+    thead {
+        display: table-header-group;
+    }
 
- .subtitle {
-  font-size:14px;
-  margin-bottom:12px;
- }
+    tr {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
 
- .section-title {
-  font-size:12px;
-  margin:12px 0 7px;
-  padding:6px 9px;
- }
+    th, td {
+        padding: 4px 5px !important;
+        line-height: 1.15 !important;
+    }
 
- .identity {
-  padding:9px;
-  gap:7px;
- }
+    h1 {
+        font-size: 17pt !important;
+    }
 
- .field input,.field select {
-  border:0;
-  border-bottom:1px solid #aaa;
-  padding:4px;
-  font-size:10px;
- }
+    h2 {
+        font-size: 12pt !important;
+        margin: 5px 0 !important;
+    }
 
- .legend {
-  gap:5px;
-  margin:7px 0;
- }
+    h3 {
+        font-size: 10pt !important;
+        margin: 4px 0 !important;
+    }
 
- .legend span {
-  padding:5px 7px;
-  font-size:9px;
- }
+    .page-break {
+        break-before: page !important;
+        page-break-before: always !important;
+    }
 
- table {
-  font-size:9px;
- }
+    .avoid-break {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
 
- th {
-  padding:6px 3px;
- }
+    /* Bibliographie et synthèse restent ensemble */
+    .bibliographie-synthese {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
 
- td {
-  padding:4px 3px;
- }
+    .bibliographie-synthese table {
+        font-size: 7.5pt !important;
+    }
 
- td.criterion {
-  min-width:0;
- }
+    .bibliographie-synthese h2,
+    .bibliographie-synthese h3 {
+        margin-top: 3px !important;
+        margin-bottom: 3px !important;
+    }
 
- input[type=radio] {
-  width:12px;
-  height:12px;
- }
-
- .score-input {
-  border:0;
-  background:transparent;
-  font-size:10px;
-  padding:2px;
- }
-
- .summary {
-  gap:8px;
-  margin-top:9px;
- }
-
- .stat {
-  padding:9px;
- }
-
- .stat strong {
-  font-size:17px;
- }
-
- .signatures {
-  margin-top:22px;
- }
-
- .signature {
-  min-height:45px;
- }
-
- .footer {
-  margin-top:12px;
- }
-
- tr,td,th {
-  break-inside:avoid;
- }
-
- .section-title {
-  break-after:avoid;
- }
+    .summary,
+    .results,
+    .signature {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
 }
+
 
 /* =========================================
    AMELIORATION DE LA LISIBILITE
@@ -622,21 +600,21 @@ tr.group-row td {
     }
 
     /* Largeur des colonnes */
-    #evaluationTable th:first-child,
-    #evaluationTable td:first-child {
+    .group-table th:first-child,
+    .group-table td:first-child {
         width: 40%;
     }
 
-    #evaluationTable th:nth-child(2),
-    #evaluationTable th:nth-child(3),
-    #evaluationTable th:nth-child(4),
-    #evaluationTable th:nth-child(5),
-    #evaluationTable th:nth-child(6) {
+    .group-table th:nth-child(2),
+    .group-table th:nth-child(3),
+    .group-table th:nth-child(4),
+    .group-table th:nth-child(5),
+    .group-table th:nth-child(6) {
         width: 9.5%;
     }
 
-    #evaluationTable th:last-child,
-    #evaluationTable td:last-child {
+    .group-table th:last-child,
+    .group-table td:last-child {
         width: 12.5%;
     }
 
@@ -709,53 +687,120 @@ tr.group-row td {
         font-size: 11px;
     }
 
-    .signatures {
-        margin-top: 28px;
+    
+ 
+
+}
+
+
+/* =========================================
+   PAGINATION PDF : EXACTEMENT 4 PAGES
+   A4 PAYSAGE
+========================================= */
+
+.group-block table {
+    margin-bottom: 18px;
+}
+
+.print-page-break {
+    display: block;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+@media print {
+
+    .print-page-break {
+        break-before: page !important;
+        page-break-before: always !important;
     }
 
-    .signature {
-        font-size: 12px;
-        min-height: 55px;
+    .group-block table {
+        margin-bottom: 10px;
     }
 
-    .footer {
+    /* compactage du contenu de la page 4 */
+    .compact-print .section-title {
+        margin: 8px 0 6px !important;
+        padding: 6px 10px !important;
+        font-size: 13px !important;
+    }
+
+    .compact-print table {
+        font-size: 9.5px !important;
+        margin-bottom: 8px;
+    }
+
+    .compact-print th {
+        font-size: 9px !important;
+        padding: 5px 4px !important;
+        line-height: 1.25 !important;
+    }
+
+    .compact-print td {
+        font-size: 9.5px !important;
+        padding: 3px 5px !important;
+        line-height: 1.25 !important;
+    }
+
+    .compact-print tr.group-row td {
+        font-size: 10.5px !important;
+        padding: 5px 7px !important;
+    }
+
+    .compact-print td.criterion {
+        font-size: 10px !important;
+    }
+
+    .compact-print .summary {
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    .compact-print .stat {
+        padding: 8px;
+    }
+
+    .compact-print .stat small {
+        font-size: 10px;
+        margin-bottom: 4px;
+    }
+
+    .compact-print .stat strong {
+        font-size: 17px;
+    }
+
+    .compact-print .signatures {
+        margin-top: 14px;
+        gap: 20px;
+    }
+
+    .compact-print .signature {
+        min-height: 42px;
+        padding-top: 6px;
         font-size: 11px;
-        margin-top: 15px;
     }
 
-    /* Eviter de couper une ligne du tableau */
-    tr,
-    td,
-    th {
-        break-inside: avoid !important;
-        page-break-inside: avoid !important;
+    .compact-print .footer {
+        margin-top: 12px;
+        padding-top: 6px;
+        font-size: 10px;
     }
 
-    thead {
-        display: table-header-group;
-    }
-
-    tfoot {
-        display: table-row-group;
-    }
-
-    .group-row {
-        break-after: avoid;
-        page-break-after: avoid;
-    }
-
-    button {
-        display: none !important;
+    .compact-print .progress-track {
+        height: 7px;
     }
 }
 
 </style>
+<base target="_blank">
 </head>
 
 <body>
 <div class="container">
 <div class="sheet">
-
+<div class="pdf-page page-one"></div>
 <div class="topline">
 <strong>PORTFOLIO FORMATION TICE 2025/2026</strong>
 <strong>ÉCOLE NATIONALE SUPÉRIEURE DES TRAVAUX PUBLICS</strong>
@@ -834,6 +879,9 @@ value="École Nationale Supérieure des Travaux Publics d'Alger – Francis Jean
 <span class="l5">Inexistant : 0 %</span>
 </div>
 
+<div class="print-page-break"></div>
+
+<!-- PAGE 2 : rubriques 1 et 2 -->
 <h2 class="section-title">I. Grille détaillée d'évaluation du cours</h2>
 
 <p style="font-size:11px">
@@ -841,27 +889,22 @@ Pour chaque critère, cochez une seule case correspondant au niveau
 d'appréciation retenu. Le pourcentage est calculé automatiquement.
 </p>
 
-<div class="table-wrap">
-<table id="evaluationTable">
+<div id="gridPage1" class="group-block"></div>
 
-<thead>
-<tr>
-<th style="width:40%">Critères d'évaluation</th>
-<th class="level-1">Excellent<br>90–100 %</th>
-<th class="level-2">Très bien<br>70–&lt;90 %</th>
-<th class="level-3">Bien<br>50–&lt;70 %</th>
-<th class="level-4">Insuffisant<br>&lt;50 %</th>
-<th class="level-5">Inexistant<br>0 %</th>
-<th>Total (%)</th>
-</tr>
-</thead>
+<div class="print-page-break"></div>
 
-<tbody id="criteriaBody"></tbody>
-</table>
-</div>
+<!-- PAGE 3 : rubriques 3 et 4 -->
+<div id="gridPage2" class="group-block"></div>
 
-<h2 class="section-title">II. Synthèse des résultats par rubrique</h2>
+<div class="print-page-break"></div>
 
+<!-- PAGE 4 : rubriques 5 et 6 -->
+<div id="gridPage3" class="group-block compact-print"></div>
+
+<div class="tail-block compact-print">
+<h2 class="section-title summary-start">
+    II. Synthèse des résultats par rubrique
+</h2>
 <div class="table-wrap">
 <table>
 <thead>
@@ -937,6 +980,8 @@ ____________________________
 <div class="footer">
 ENSTP – Département DIB / DMS
 </div>
+
+</div><!-- /tail-block -->
 
 </div>
 
@@ -1112,13 +1157,38 @@ function mentionColor(score){
 
 // CONSTRUCTION DE LA GRILLE
 
+// EN-TETE COMMUN A TOUS LES TABLEAUX DE RUBRIQUES
+const tableHeader=`
+<thead>
+<tr>
+<th style="width:40%">Critères d'évaluation</th>
+<th class="level-1">Excellent<br>90–100 %</th>
+<th class="level-2">Très bien<br>70–&lt;90 %</th>
+<th class="level-3">Bien<br>50–&lt;70 %</th>
+<th class="level-4">Insuffisant<br>&lt;50 %</th>
+<th class="level-5">Inexistant<br>0 %</th>
+<th>Total (%)</th>
+</tr>
+</thead>`;
+
 function buildGrid(){
 
- const body=document.getElementById("criteriaBody");
- body.innerHTML="";
  totalCriteria=0;
 
+ const pageBlocks=[
+  document.getElementById("gridPage1"),
+  document.getElementById("gridPage2"),
+  document.getElementById("gridPage3")
+ ];
+
+ pageBlocks.forEach(block=>block.innerHTML="");
+
  groups.forEach((group,gi)=>{
+
+  // repartition : rubriques 1-2 -> page 2, 3-4 -> page 3, 5-6 -> page 4
+  const blockIndex=gi<=1?0:gi<=3?1:2;
+
+  const tbody=document.createElement("tbody");
 
   const heading=document.createElement("tr");
   heading.className="group-row";
@@ -1128,7 +1198,7 @@ function buildGrid(){
    <td class="total-cell" id="groupTotal${gi}">—</td>
   `;
 
-  body.appendChild(heading);
+  tbody.appendChild(heading);
 
   group.criteria.forEach((criterion,ci)=>{
 
@@ -1155,8 +1225,20 @@ function buildGrid(){
     <td class="total-cell" id="total_${gi}_${ci}">—</td>
    `;
 
-   body.appendChild(row);
+   tbody.appendChild(row);
   });
+
+  // chaque rubrique constitue son propre tableau independant
+  const table=document.createElement("table");
+  table.className="group-table";
+  table.innerHTML=tableHeader;
+  table.appendChild(tbody);
+
+  const wrap=document.createElement("div");
+  wrap.className="table-wrap";
+  wrap.appendChild(table);
+
+  pageBlocks[blockIndex].appendChild(wrap);
 
  });
 
@@ -1301,7 +1383,7 @@ function validateAndPrint(){
  }
 
  const evaluated=document.querySelectorAll(
-  '#criteriaBody input[type="radio"]:checked'
+  '.group-block input[type="radio"]:checked'
  ).length;
 
  if(evaluated!==totalCriteria){
@@ -1322,7 +1404,7 @@ function resetGrid(){
  if(!confirm("Effacer toutes les réponses de la grille ?"))return;
 
  document.querySelectorAll(
-  '#criteriaBody input[type="radio"]:checked'
+  '.group-block input[type="radio"]:checked'
  ).forEach(input=>input.checked=false);
 
  calculateResults();
